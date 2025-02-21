@@ -53,18 +53,18 @@ export function ProductCard({ product, showRecommendations = true }: ProductCard
             </div>
           </Link>
           <CardFooter className="p-4">
-            <Button
-              className="w-full"
-              onClick={(e) => {
-                e.preventDefault();
-                addToCart(product);
-              }}
-              whileTap={{ scale: 0.95 }}
-              as={motion.button}
-            >
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Add to Cart
-            </Button>
+            <motion.div whileTap={{ scale: 0.95 }}>
+              <Button
+                className="w-full"
+                onClick={(e) => {
+                  e.preventDefault();
+                  addToCart(product);
+                }}
+              >
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                Add to Cart
+              </Button>
+            </motion.div>
           </CardFooter>
         </Card>
       </motion.div>
