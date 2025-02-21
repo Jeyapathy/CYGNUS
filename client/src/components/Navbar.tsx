@@ -8,14 +8,14 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/">
-          <a className="text-2xl font-bold">HoverCart</a>
+          <span className="text-2xl font-bold cursor-pointer">HoverCart</span>
         </Link>
         <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
           {categories.map((category) => (
             <Link key={category} href={`/category/${category.toLowerCase()}`}>
-              <a className="text-sm font-medium transition-colors hover:text-primary">
+              <span className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">
                 {category}
-              </a>
+              </span>
             </Link>
           ))}
         </nav>
