@@ -25,11 +25,15 @@ export function BrandsSection() {
               key={brand.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              whileHover={{ 
+                scale: 1.2,
+                rotate: 5,
+                transition: { type: "spring", stiffness: 300 }
+              }}
               transition={{ delay: index * 0.1 }}
-              className="flex flex-col items-center gap-2"
+              className="flex items-center justify-center"
             >
-              <brand.Icon className="w-12 h-12 text-gray-600 hover:text-purple-600 transition-colors" />
-              <span className="text-sm font-medium">{brand.name}</span>
+              <brand.Icon className="w-16 h-16 text-gray-600 hover:text-purple-600 transition-colors cursor-pointer" />
             </motion.div>
           ))}
         </div>
