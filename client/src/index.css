@@ -1,8 +1,8 @@
 
 /* Cygnus Logo Animation Styles */
 .cygnus-logo {
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  color: hsl(var(--foreground));
+  text-shadow: 0 0 20px rgba(var(--foreground), 0.5);
   transition: text-shadow 0.3s ease-in-out;
 }
 
