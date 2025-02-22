@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "./CartProvider";
+import { useWishlist } from "@/hooks/useWishlist";
 import { Product, products } from "@/data/products";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
