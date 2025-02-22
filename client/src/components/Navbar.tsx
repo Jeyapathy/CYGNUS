@@ -13,7 +13,8 @@ export function Navbar() {
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
-          <Link href="/">
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/logo.svg" alt="Cygnus Logo" className="w-8 h-8" />
             <span className="text-2xl font-bold cursor-pointer">Cygnus</span>
           </Link>
           <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">

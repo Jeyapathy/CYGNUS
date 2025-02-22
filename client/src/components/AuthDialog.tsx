@@ -27,7 +27,7 @@ export function AuthDialog({ isOpen, onClose }: AuthDialogProps) {
                 className="w-8 h-8"
               />
             </div>
-            <h2 className="text-2xl font-semibold">Welcome back</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Welcome back</h2>
             <p className="text-sm text-muted-foreground mt-1">
               Login with your Apple or Google account
             </p>
@@ -68,7 +68,7 @@ export function AuthDialog({ isOpen, onClose }: AuthDialogProps) {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <Button variant="link" className="px-0 font-normal">
+                  <Button variant="link" className="px-0 font-normal h-auto">
                     Forgot your password?
                   </Button>
                 </div>
@@ -79,12 +79,14 @@ export function AuthDialog({ isOpen, onClose }: AuthDialogProps) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <Button className="w-full">Login</Button>
+              <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                Login
+              </Button>
             </div>
 
             <div className="text-center text-sm">
               Don't have an account?{" "}
-              <Button variant="link" className="px-0 font-normal">
+              <Button variant="link" className="px-0 font-normal h-auto">
                 Sign up
               </Button>
             </div>
