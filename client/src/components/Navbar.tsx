@@ -14,16 +14,10 @@ export function Navbar() {
   useEffect(() => {
     const logo = document.querySelector(".cygnus-logo");
     
-    gsap.from(logo, { 
-      opacity: 0, 
-      y: -50, 
-      duration: 1.5, 
-      ease: "power3.out"
-    });
-
     const handleMouseEnter = () => {
       gsap.to(logo, { 
-        scale: 1.2, 
+        scale: 1.2,
+        y: -5,
         duration: 0.3,
         ease: "power2.out"
       });
@@ -31,7 +25,8 @@ export function Navbar() {
 
     const handleMouseLeave = () => {
       gsap.to(logo, { 
-        scale: 1, 
+        scale: 1,
+        y: 0,
         duration: 0.3,
         ease: "power2.in"
       });
