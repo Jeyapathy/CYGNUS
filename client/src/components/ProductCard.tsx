@@ -19,20 +19,54 @@ const formatPrice = (price: number): string => {
 export function ProductCard({ product, showRecommendations = true }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
-  const [inWishlist, setInWishlist] = useState(false); // Added wishlist state
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const inWishlist = isInWishlist(product.id);
 
-  const addToWishlist = (product:Product) => {
-    //Implementation for adding to wishlist.  Replace with actual logic.
-    setInWishlist(true);
-    console.log("Added to wishlist:", product);
+  const handleAddToCart = () => {
+    addToCart(product);
   };
 
-  const removeFromWishlist = (productId: number) => {
-    //Implementation for removing from wishlist. Replace with actual logic.
-    setInWishlist(false);
-    console.log("Removed from wishlist:", productId);
+  const handleWishlist = () => {
+    if (inWishlist) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
+
+  return (
+    <Card 
+      className="relative overflow-hidden group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <CardContent className="p-0">
+        <Link href={`/product/${product.id}`}>
+          <img 
+            src={product.image} 
+            alt={product.name}
+            className="w-full h-48 object-cover"
+          />
+        </Link>
+      </CardContent>
+      <CardFooter className="p-4">
+        <div className="w-full">
+          <h3 className="font-semibold">{product.name}</h3>
+          <p className="text-muted-foreground">{formatPrice(product.price)}</p>
+          <div className="flex gap-2 mt-2">
+            <Button onClick={handleAddToCart} className="flex-1">
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Add to Cart
+            </Button>
+            <Button variant="outline" size="icon" onClick={handleWishlist}>
+              <Heart className={`h-4 w-4 ${inWishlist ? "fill-current" : ""}`} />
+            </Button>
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
+  );
 
   const recommendations = products.filter(p =>
     product.recommendations.includes(p.id)
