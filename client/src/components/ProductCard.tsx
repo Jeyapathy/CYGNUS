@@ -12,19 +12,13 @@ interface ProductCardProps {
   showRecommendations?: boolean;
 }
 
-export function ProductCard({ product, showRecommendations }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-  const [isHovered, setIsHovered] = useState(false);
   const inWishlist = isInWishlist(product.id);
-  const recommendations = showRecommendations ? product.recommendations || [] : [];
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative">
       <Card className="overflow-hidden">
         <Link href={`/product/${product.id}`}>
           <div className="cursor-pointer">
@@ -61,30 +55,7 @@ export function ProductCard({ product, showRecommendations }: ProductCardProps) 
         </CardFooter>
       </Card>
 
-      {showRecommendations && isHovered && recommendations.length > 0 && (
-        <div className="absolute left-full top-0 ml-4 z-10 w-64 bg-background/95 backdrop-blur-sm shadow-lg rounded-lg p-4">
-          <h4 className="font-semibold mb-3">Recommended with this:</h4>
-          <div className="space-y-3">
-            {recommendations.map((rec) => (
-              <Link key={rec.id} href={`/product/${rec.id}`}>
-                <div className="flex items-center gap-3 hover:bg-accent p-2 rounded-lg cursor-pointer">
-                  <img
-                    src={rec.image}
-                    alt={rec.name}
-                    className="w-12 h-12 object-cover rounded"
-                  />
-                  <div>
-                    <p className="font-medium">{rec.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {formatPrice(rec.price)}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 }
