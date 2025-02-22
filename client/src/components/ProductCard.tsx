@@ -13,7 +13,10 @@ interface ProductCardProps {
 }
 
 const formatPrice = (price: number): string => {
-  return `₹${(price / 100).toFixed(2)}`; // Assuming prices are in paise
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR'
+  }).format(price / 100);
 };
 
 export function ProductCard({ product, showRecommendations = true }: ProductCardProps) {
