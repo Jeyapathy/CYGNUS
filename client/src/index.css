@@ -1,3 +1,15 @@
+
+/* Cygnus Logo Animation Styles */
+.cygnus-logo {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.cygnus-logo:hover {
+  text-shadow: 0 0 30px rgba(0, 150, 255, 0.8), 0 0 50px rgba(0, 150, 255, 0.5);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { useEffect } from "react";
+import gsap from "gsap";
 import { SearchBar } from "./SearchBar";
 import { CartDropdown } from "./CartDropdown";
 import { Button } from "./ui/button";
@@ -9,13 +11,31 @@ import { AuthDialog } from "./AuthDialog";
 export function Navbar() {
   const [showAuthDialog, setShowAuthDialog] = useState(false);
 
+  useEffect(() => {
+    const logo = document.querySelector(".cygnus-logo");
+    
+    gsap.from(logo, { 
+      opacity: 0, 
+      y: -50, 
+      duration: 1.5, 
+      ease: "power3.out"
+    });
+
+    logo?.addEventListener("mouseenter", () => {
+      gsap.to(logo, { scale: 1.2, duration: 0.3 });
+    });
+
+    logo?.addEventListener("mouseleave", () => {
+      gsap.to(logo, { scale: 1, duration: 0.3 });
+    });
+  }, []);
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Cygnus Logo" className="w-8 h-8" />
-            <span className="text-2xl font-bold cursor-pointer">Cygnus</span>
+            <div className="cygnus-logo text-2xl font-bold cursor-pointer">Cygnus</div>
           </Link>
           <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
             {categories.map((category) => (
