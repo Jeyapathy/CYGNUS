@@ -3,9 +3,10 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
-import { useWishlist } from "@/components/WishlistProvider";
+import { useWishlist } from "@/hooks/useWishlist";
 import { Product } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 interface ProductCardProps {
   product: Product;
