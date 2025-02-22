@@ -7,7 +7,7 @@ import { CartDropdown } from "./CartDropdown";
 import { Button } from "./ui/button";
 import { categories } from "@/data/products";
 import { AuthDialog } from "./AuthDialog";
-import { Heart } from "react-feather"; // Assuming you have react-feather installed
+import { WishlistDrawer } from "./WishlistDrawer";
 
 export function Navbar() {
   const [showAuthDialog, setShowAuthDialog] = useState(false);
@@ -62,10 +62,7 @@ export function Navbar() {
           </nav>
           <div className="ml-auto flex items-center space-x-4">
             <SearchBar />
-            <Button variant="ghost" size="icon" className="relative">
-              <Heart className="h-6 w-6 hover:text-purple-600 transition-colors" />
-              <span className="absolute -top-1 -right-1 bg-purple-600 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center">0</span>
-            </Button>
+            <WishlistDrawer />
             <CartDropdown />
             <Button variant="outline" onClick={() => setShowAuthDialog(true)}>
               Sign In

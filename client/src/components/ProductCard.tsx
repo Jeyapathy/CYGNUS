@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "./CartProvider";
 import { Product, products } from "@/data/products";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -19,15 +19,29 @@ const formatPrice = (price: number): string => {
 export function ProductCard({ product, showRecommendations = true }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
+  const [inWishlist, setInWishlist] = useState(false); // Added wishlist state
 
-  const recommendations = products.filter(p => 
+  const addToWishlist = (product:Product) => {
+    //Implementation for adding to wishlist.  Replace with actual logic.
+    setInWishlist(true);
+    console.log("Added to wishlist:", product);
+  };
+
+  const removeFromWishlist = (productId: number) => {
+    //Implementation for removing from wishlist. Replace with actual logic.
+    setInWishlist(false);
+    console.log("Removed from wishlist:", productId);
+  };
+
+
+  const recommendations = products.filter(p =>
     product.recommendations.includes(p.id)
   );
 
   return (
-    <motion.div 
-      className="relative" 
-      onMouseEnter={() => setIsHovered(true)} 
+    <motion.div
+      className="relative"
+      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -58,16 +72,21 @@ export function ProductCard({ product, showRecommendations = true }: ProductCard
           </Link>
           <CardFooter className="p-4">
             <motion.div whileTap={{ scale: 0.95 }}>
-              <Button
-                className="w-full"
-                onClick={(e) => {
+              <div className="flex gap-2">
+                <Button onClick={(e) => {
                   e.preventDefault();
                   addToCart(product);
-                }}
-              >
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Add to Cart
-              </Button>
+                }} className="flex-1">
+                  Add to Cart
+                </Button>
+                <Button
+                  variant={inWishlist ? "destructive" : "outline"}
+                  size="icon"
+                  onClick={() => inWishlist ? removeFromWishlist(product.id) : addToWishlist(product)}
+                >
+                  <Heart className={`h-4 w-4 ${inWishlist ? 'fill-current' : ''}`} />
+                </Button>
+              </div>
             </motion.div>
           </CardFooter>
         </Card>
