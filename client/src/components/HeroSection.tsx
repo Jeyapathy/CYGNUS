@@ -37,9 +37,9 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <img
-            src="https://placehold.co/800x600/purple/white?text=Smart+TV"
-            alt="Smart TV Display"
-            className="rounded-lg shadow-2xl"
+            src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=500&auto=format&fit=crop&q=60"
+            alt="Premium Electronics Display"
+            className="rounded-lg shadow-2xl w-full h-auto"
           />
         </motion.div>
       </div>
