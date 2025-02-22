@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { FaLinkedin, FaGithub, FaInstagram, FaYoutube } from "react-icons/fa";
+import styles from "./SocialIcons.module.css";
 
 export function Footer() {
   return (
@@ -95,20 +96,60 @@ export function Footer() {
           {/* Connect With Us */}
           <div>
             <h3 className="font-semibold mb-4">Connect With Us</h3>
-            <div className="flex space-x-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                <FaLinkedin className="w-6 h-6" />
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                <FaGithub className="w-6 h-6" />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                <FaInstagram className="w-6 h-6" />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                <FaYoutube className="w-6 h-6" />
-              </a>
-            </div>
+            <ul className={styles.socialIcons}>
+              <li className={styles.iconWrapper}>
+                <a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`${styles.iconLink} ${styles.linkedin}`}
+                  aria-label="LinkedIn"
+                >
+                  <div className={styles.filled}></div>
+                  <FaLinkedin className="w-6 h-6 relative z-10" />
+                </a>
+                <div className={styles.tooltip}>LinkedIn</div>
+              </li>
+              <li className={styles.iconWrapper}>
+                <a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`${styles.iconLink} ${styles.github}`}
+                  aria-label="GitHub"
+                >
+                  <div className={styles.filled}></div>
+                  <FaGithub className="w-6 h-6 relative z-10" />
+                </a>
+                <div className={styles.tooltip}>GitHub</div>
+              </li>
+              <li className={styles.iconWrapper}>
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`${styles.iconLink} ${styles.instagram}`}
+                  aria-label="Instagram"
+                >
+                  <div className={styles.filled}></div>
+                  <FaInstagram className="w-6 h-6 relative z-10" />
+                </a>
+                <div className={styles.tooltip}>Instagram</div>
+              </li>
+              <li className={styles.iconWrapper}>
+                <a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={`${styles.iconLink} ${styles.youtube}`}
+                  aria-label="YouTube"
+                >
+                  <div className={styles.filled}></div>
+                  <FaYoutube className="w-6 h-6 relative z-10" />
+                </a>
+                <div className={styles.tooltip}>YouTube</div>
+              </li>
+            </ul>
           </div>
         </div>
 
