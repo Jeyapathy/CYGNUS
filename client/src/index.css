@@ -9,15 +9,15 @@
 .cygnus-logo {
   font-size: 2rem;
   font-weight: bold;
-  color: hsl(var(--foreground));
-  text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  color: rgb(147, 51, 234);
+  text-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
 .cygnus-logo:hover {
-  text-shadow: 0 0 30px hsl(var(--primary) / 0.8), 0 0 50px hsl(var(--primary) / 0.5);
-  color: hsl(var(--primary));
+  text-shadow: 0 0 30px rgba(147, 51, 234, 0.8), 0 0 50px rgba(147, 51, 234, 0.5);
+  color: rgb(168, 85, 247);
 }
 
 @tailwind base;
