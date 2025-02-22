@@ -21,13 +21,29 @@ export function Navbar() {
       ease: "power3.out"
     });
 
-    logo?.addEventListener("mouseenter", () => {
-      gsap.to(logo, { scale: 1.2, duration: 0.3 });
-    });
+    const handleMouseEnter = () => {
+      gsap.to(logo, { 
+        scale: 1.2, 
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    };
 
-    logo?.addEventListener("mouseleave", () => {
-      gsap.to(logo, { scale: 1, duration: 0.3 });
-    });
+    const handleMouseLeave = () => {
+      gsap.to(logo, { 
+        scale: 1, 
+        duration: 0.3,
+        ease: "power2.in"
+      });
+    };
+
+    logo?.addEventListener("mouseenter", handleMouseEnter);
+    logo?.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      logo?.removeEventListener("mouseenter", handleMouseEnter);
+      logo?.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
 
   return (
