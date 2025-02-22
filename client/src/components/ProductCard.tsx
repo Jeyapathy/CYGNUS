@@ -12,6 +12,10 @@ interface ProductCardProps {
   showRecommendations?: boolean;
 }
 
+const formatPrice = (price: number): string => {
+  return `₹${(price / 100).toFixed(2)}`; // Assuming prices are in paise
+};
+
 export function ProductCard({ product, showRecommendations = true }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
@@ -48,7 +52,7 @@ export function ProductCard({ product, showRecommendations = true }: ProductCard
               <CardContent className="p-4">
                 <h3 className="font-semibold">{product.name}</h3>
                 <p className="text-sm text-muted-foreground">{product.description}</p>
-                <p className="mt-2 font-bold">${product.price}</p>
+                <p className="mt-2 font-bold">{formatPrice(product.price)}</p>
               </CardContent>
             </div>
           </Link>
@@ -95,7 +99,7 @@ export function ProductCard({ product, showRecommendations = true }: ProductCard
                     <div>
                       <p className="font-medium">{rec.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        ${rec.price}
+                        {formatPrice(rec.price)}
                       </p>
                     </div>
                   </motion.div>
