@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "./CartProvider";
+import { useWishlist } from "@/hooks/useWishlist";
 import { Product, products } from "@/data/products";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
@@ -13,10 +14,7 @@ interface ProductCardProps {
 }
 
 const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR'
-  }).format(price / 100);
+  return `₹${(price / 100).toFixed(2)}`; // Assuming prices are in paise
 };
 
 export function ProductCard({ product, showRecommendations = true }: ProductCardProps) {
