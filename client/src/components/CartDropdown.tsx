@@ -8,9 +8,15 @@ import { ShoppingCart, Trash2 } from "lucide-react";
 import { useCart } from "./CartProvider";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
+import { useLocation } from 'wouter';
 
 export function CartDropdown() {
   const { items, removeFromCart, total } = useCart();
+  const [, setLocation] = useLocation();
+
+  const formatPrice = (price: number): string => {
+    return `₹${(price).toFixed(2)}`;
+  };
 
   return (
     <DropdownMenu>
@@ -39,7 +45,7 @@ export function CartDropdown() {
                 <div className="flex-1">
                   <p className="font-medium">{item.product.name}</p>
                   <p className="text-sm text-muted-foreground">
-                    ${item.product.price} × {item.quantity}
+                    {formatPrice(item.product.price)} × {item.quantity}
                   </p>
                 </div>
                 <Button
@@ -54,12 +60,18 @@ export function CartDropdown() {
           )}
         </ScrollArea>
         <Separator />
-        <div className="p-4">
+        <div className="p-4 border-t">
           <div className="flex justify-between mb-4">
             <span className="font-medium">Total:</span>
-            <span>${total.toFixed(2)}</span>
+            <span>{formatPrice(total)}</span>
           </div>
-          <Button className="w-full" disabled={items.length === 0}>
+          <Button 
+            className="w-full"
+            onClick={() => {
+              setLocation('/payment');
+            }}
+            disabled={items.length === 0}
+          >
             Checkout
           </Button>
         </div>

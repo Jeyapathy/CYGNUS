@@ -6,6 +6,7 @@ import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "./CartProvider";
 import { Product, products } from "@/data/products";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { DEFAULT_PRODUCT_IMAGE } from "@/data/products";
 
 interface ProductCardProps {
   product: Product;
@@ -17,6 +18,7 @@ const formatPrice = (price: number): string => {
 };
 
 export function ProductCard({ product, showRecommendations = true }: ProductCardProps) {
+  const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { addToCart } = useCart();
   const [inWishlist, setInWishlist] = useState(false); // Added wishlist state
@@ -38,6 +40,10 @@ export function ProductCard({ product, showRecommendations = true }: ProductCard
     product.recommendations.includes(p.id)
   );
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <motion.div
       className="relative"
@@ -56,9 +62,10 @@ export function ProductCard({ product, showRecommendations = true }: ProductCard
             <div className="cursor-pointer">
               <div className="aspect-square overflow-hidden">
                 <motion.img
-                  src={product.image}
+                  src={imageError ? DEFAULT_PRODUCT_IMAGE : product.image}
                   alt={product.name}
                   className="h-full w-full object-cover"
+                  onError={handleImageError}
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 />

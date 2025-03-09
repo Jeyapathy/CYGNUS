@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
+import { categories } from "@/data/products";
 
 interface Category {
   name: string;
@@ -8,16 +9,26 @@ interface Category {
   href: string;
 }
 
-const categories: Category[] = [
-  { name: "All", icon: "🌟", href: "/" },
-  { name: "Electronics", icon: "💻", href: "/category/electronics" },
-  { name: "Laptops", icon: "💻", href: "/category/laptops" },
-  { name: "Phones", icon: "📱", href: "/category/phones" },
-  { name: "Accessories", icon: "🎧", href: "/category/accessories" },
-  { name: "Headphones", icon: "🎧", href: "/category/headphones" },
-  { name: "Gaming", icon: "🎮", href: "/category/gaming" },
-  { name: "TV & Audio", icon: "📺", href: "/category/tv-audio" },
-];
+// Map product categories to icons
+function getCategoryIcon(category: string): string {
+  const icons: Record<string, string> = {
+    "Audio": "🎧",
+    "Wearables": "⌚",
+    "Laptops": "💻",
+    "Smartphones": "📱",
+    "Gaming": "🎮",
+    "TV & Audio": "📺",
+    "Smart Home": "🏠",
+    "Electronics": "🔌"
+  };
+  return icons[category] || "🛍️";
+}
+
+const categoryList: Category[] = categories.map(category => ({
+  name: category,
+  icon: getCategoryIcon(category),
+  href: `/category/${category.toLowerCase()}`
+}));
 
 const container = {
   hidden: { opacity: 0 },
@@ -43,11 +54,6 @@ export function CategorySection() {
             <h2 className="text-3xl font-bold">Browse Categories</h2>
             <p className="text-muted-foreground mt-2">Find what you're looking for</p>
           </div>
-          <Link href="/categories">
-            <span className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 cursor-pointer">
-              View All →
-            </span>
-          </Link>
         </div>
         
         <motion.div 
@@ -56,7 +62,7 @@ export function CategorySection() {
           animate="show"
           className="grid grid-cols-2 md:grid-cols-4 gap-4"
         >
-          {categories.map((category) => (
+          {categoryList.map((category) => (
             <motion.div key={category.name} variants={item}>
               <Link href={category.href}>
                 <Card className="cursor-pointer hover:shadow-lg transition-shadow">

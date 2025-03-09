@@ -18,6 +18,10 @@ export default function ProductDetail() {
     product.recommendations.includes(p.id)
   );
 
+  const formatPrice = (price: number): string => {
+    return `₹${(price).toFixed(2)}`;
+  };
+
   return (
     <div className="container py-8">
       <div className="grid md:grid-cols-2 gap-8">
@@ -30,7 +34,7 @@ export default function ProductDetail() {
         </div>
         <div>
           <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
-          <p className="text-xl font-semibold mb-4">${product.price}</p>
+          <p className="text-xl font-semibold mb-4">{formatPrice(product.price)}</p>
           <p className="text-gray-600 mb-6">{product.description}</p>
           <Button size="lg" onClick={() => addToCart(product)}>
             <ShoppingCart className="mr-2 h-5 w-5" />

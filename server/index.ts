@@ -56,7 +56,7 @@ app.use((req, res, next) => {
     }
 
     // Use a safer default by binding to 127.0.0.1 instead of 0.0.0.0
-    const port = 5000;
+    const port = 5001;  // Change from 5000 to 5001
     server.listen(port, "127.0.0.1", () => {
       log(`Server running on http://127.0.0.1:${port}`);
     });
