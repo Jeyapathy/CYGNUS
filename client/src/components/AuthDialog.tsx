@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface AuthDialogProps {
   isOpen: boolean;
@@ -12,8 +14,52 @@ interface AuthDialogProps {
 }
 
 export function AuthDialog({ isOpen, onClose }: AuthDialogProps) {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (isSignUp && password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/${isSignUp ? 'signup' : 'login'}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: email, password })
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        if (response.status === 409) {
+          toast({
+            title: "Account already exists",
+            description: "Please try logging in instead",
+            variant: "destructive"
+          });
+        } else {
+          setError(data.message || 'An error occurred');
+        }
+        return;
+      }
+
+      onClose();
+      toast({
+        title: isSignUp ? "Account created successfully" : "Welcome back!",
+        description: isSignUp ? "Please log in with your credentials" : "You've successfully logged in",
+      });
+    } catch (err) {
+      setError('Failed to connect to the server');
+    }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -54,7 +100,12 @@ export function AuthDialog({ isOpen, onClose }: AuthDialogProps) {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -63,31 +114,56 @@ export function AuthDialog({ isOpen, onClose }: AuthDialogProps) {
                   placeholder="m@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <Button variant="link" className="px-0 font-normal h-auto">
-                    Forgot your password?
-                  </Button>
+                  {!isSignUp && (
+                    <Button variant="link" className="px-0 font-normal h-auto">
+                      Forgot your password?
+                    </Button>
+                  )}
                 </div>
                 <Input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Login
+              {isSignUp && (
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+              )}
+              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
+                {isSignUp ? 'Sign Up' : 'Login'}
               </Button>
-            </div>
+            </form>
 
             <div className="text-center text-sm">
-              Don't have an account?{" "}
-              <Button variant="link" className="px-0 font-normal h-auto">
-                Sign up
+              {isSignUp ? 'Already have an account?' : "Don't have an account?"}{" "}
+              <Button
+                variant="link"
+                className="px-0 font-normal h-auto"
+                onClick={() => {
+                  setIsSignUp(!isSignUp);
+                  setError("");
+                  setPassword("");
+                  setConfirmPassword("");
+                }}
+              >
+                {isSignUp ? 'Log in' : 'Sign up'}
               </Button>
             </div>
           </div>

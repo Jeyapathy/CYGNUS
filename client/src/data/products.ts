@@ -35,7 +35,7 @@ export const products: Product[] = [
     name: "DJ Controller",
     price: 34999,
     description: "Professional DJ controller with built-in audio interface",
-    image: "https://images.unsplash.com/photo-1628618643086-3e7c52be206e?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=500&auto=format&fit=crop&q=60",
     category: "Audio",
     recommendations: [33, 35, 37]
   },
@@ -126,7 +126,7 @@ export const products: Product[] = [
     name: "Fitness Tracker Pro",
     price: 8999,
     description: "Advanced fitness tracker with ECG monitoring",
-    image: "https://images.unsplash.com/photo-1575311373937-040b8e3fd6ce?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1557438159-51eec7a6c9e8?w=500&auto=format&fit=crop&q=60",
     category: "Wearables",
     recommendations: [44, 45, 46]
   },
@@ -135,7 +135,7 @@ export const products: Product[] = [
     name: "Smart Ring",
     price: 29999,
     description: "Health monitoring smart ring with sleep tracking",
-    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1651752090085-50375d90bf8b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     category: "Wearables",
     recommendations: [43, 45, 47]
   },
@@ -175,7 +175,7 @@ export const products: Product[] = [
     name: "Smart Desk Lamp",
     price: 3999,
     description: "Adjustable LED desk lamp with wireless charging base",
-    image: "https://images.unsplash.com/photo-1534281368625-1c90d3170590?w=500&auto=format&fit=crop&q=60",
+    image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500&auto=format&fit=crop&q=60",
     category: "Electronics",
     recommendations: [47, 49, 50]
   },
@@ -198,9 +198,17 @@ export const products: Product[] = [
     image: "https://images.unsplash.com/photo-1567925086590-62ff566e841b?w=500&auto=format&fit=crop&q=60",
     category: "Smart Home",
     recommendations: [37, 38, 49]
-  }
-
-]; // End of products array
+  },
+  {
+    id: 51,
+    name: "Pioneer DDJ-400 DJ Controller",
+    price: 24999,
+    description: "Professional 2-channel DJ controller for rekordbox dj with dynamic performance features",
+    image: "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=500&auto=format&fit=crop&q=60",
+    category: "Audio",
+    recommendations: [33, 34, 40]
+  },
+]; 
 
 export const searchProducts = (query: string): Product[] => {
   const searchTerm = query.toLowerCase().trim();

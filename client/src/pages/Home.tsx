@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { products } from "@/data/products";
 import { ProductGrid } from "@/components/ProductGrid";
 import { HeroSection } from "@/components/HeroSection";
@@ -16,9 +17,9 @@ export default function Home() {
               <h2 className="text-3xl font-bold">Featured Products</h2>
               <p className="text-muted-foreground mt-2">Handpicked deals just for you</p>
             </div>
-            <span className="text-purple-600 hover:text-purple-700 cursor-pointer">
+            <Link href="/products" className="text-purple-600 hover:text-purple-700 cursor-pointer">
               View All →
-            </span>
+            </Link>
           </div>
           <ProductGrid products={products} />
         </div>

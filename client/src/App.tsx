@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import ProductDetail from "@/pages/ProductDetail";
 import CategoryPage from "@/pages/CategoryPage";
 import Payment from "@/pages/Payment";
+import AllProducts from "@/pages/AllProducts";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient({
@@ -25,6 +26,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/products" component={AllProducts} />
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/category/:category" component={CategoryPage} />
       <Route path="/payment" component={Payment} />

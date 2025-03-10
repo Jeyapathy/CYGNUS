@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
 export function HeroSection() {
+  const [, setLocation] = useLocation();
+
   return (
     <div className="bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/10 dark:to-purple-900/20">
       <div className="container flex flex-col-reverse md:flex-row items-center py-16 md:py-24 gap-8">
@@ -13,22 +16,14 @@ export function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-4xl md:text-6xl font-bold">
-            Experience the Future of{" "}
-            <span className="text-purple-600 dark:text-purple-400">Electronics</span>
+            Discover Amazing Products
           </h1>
-          <p className="text-lg text-muted-foreground max-w-[600px]">
-            Discover cutting-edge technology and premium electronic appliances that
-            transform your lifestyle. Shop the latest innovations with Cygnus.
+          <p className="text-xl text-muted-foreground">
+            Shop the latest tech gadgets and accessories
           </p>
-          <div className="flex gap-4">
-            <Button size="lg" className="group">
-              Shop Now
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button size="lg" variant="outline">
-              Learn More
-            </Button>
-          </div>
+          <Button size="lg" onClick={() => setLocation("/products")}>
+            Shop Now <ArrowRight className="ml-2" />
+          </Button>
         </motion.div>
         <motion.div 
           className="flex-1"
